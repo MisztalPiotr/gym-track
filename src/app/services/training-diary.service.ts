@@ -14,27 +14,31 @@ export class TrainingDiaryService {
   constructor(private db: AngularFireDatabase) {}
 
   // Pobranie wszystkich dni użytkownika
- getDays(userKey: string): Observable<Day[]> {
+ // ...existing code...
+getDays(userKey: string): Observable<Day[]> {
   return this.db.object(`trainingDays/${userKey}`).snapshotChanges().pipe(
     map(snapshot => {
       const daysData = snapshot.payload.val() || {};
-      return Object.keys(daysData).map(date => {
-        const day = daysData[date];
-        const exercisesObj = day.exercises || {};
-        
-        // Mapowanie ćwiczeń z obiektu na tablicę
-        const exercises: Exercise[] = Object.keys(exercisesObj).map(key => ({
-          ...exercisesObj[key], // rozbicie zawartości ćwiczenia
-          sets: Object.values(exercisesObj[key].sets || []), // zamiana sets na tablicę
-          name: exercisesObj[key].name,
-          notes: exercisesObj[key].notes || '' // obsługuje opcjonalne notes
-        }));
-
-        return { date, exercises };
-      });
+      // Sortuj klucze (daty) rosnąco, żeby kolejność była przewidywalna
+      return Object.keys(daysData)
+        .sort()
+        .map(date => {
+          const day = daysData[date] || {};
+          const exercisesObj = day.exercises || {};
+          const exercises: Exercise[] = Object.keys(exercisesObj || {}).map(key => {
+            const e = exercisesObj[key] || {};
+            return {
+              name: e.name || key,
+              sets: Array.isArray(e.sets) ? [...e.sets] : Object.values(e.sets || []),
+              notes: e.notes || ''
+            } as Exercise;
+          });
+          return { date, exercises };
+        });
     })
   );
 }
+// ...existing code...
 
   // Dodanie nowego dnia
   addDay(userKey: string, date: string): Promise<void> {
