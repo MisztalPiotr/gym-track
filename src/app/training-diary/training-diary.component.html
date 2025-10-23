@@ -1,0 +1,73 @@
+<div class="container">
+  <header>
+    <h1>Dziennik Treningowy</h1>
+    <div class="hamburger" (click)="toggleMenu()" [class.rotated]="menuOpen">
+      ☰
+    </div>
+  </header>
+
+  <nav id="menu" class="menu" [class.hidden]="!menuOpen">
+    <h2>📅 Wybierz istniejący dzień treningowy</h2>
+    <select [(ngModel)]="selectedDate" (change)="onDayChange($event)">
+  <option *ngFor="let day of days" [value]="day.date">{{day.date}}</option>
+</select>
+
+    
+  </nav>
+
+ <div class="container">
+  <h2>➕ Dodaj nowy dzień:</h2>
+  <form (ngSubmit)="addNewDay()" #newDayForm="ngForm" class="add-day-form">
+    <input type="date" [(ngModel)]="newDayDate" name="dayDate" required />
+    <button type="submit" [disabled]="newDayForm.invalid">Dodaj</button>
+  </form>
+
+  <!-- Wyświetl aktualny dzień -->
+  <div *ngIf="currentDay" class="current-day-panel">
+   <h1>{{ currentDay?.date }}</h1>
+    <!-- Input na nazwę ćwiczenia -->
+    <input type="text" [(ngModel)]="newExerciseName" placeholder="Nazwa ćwiczenia" name="exerciseName" />
+
+    <!-- Dodaj serię -->
+    <button (click)="addExercise()" [disabled]="!newExerciseName.trim()" class="add-set-btn">
+      Dodaj serię
+    </button>
+  </div>
+</div>
+
+<div class="blurred-background"></div>
+  <div id="currentDayContainer">
+    <!-- renderowanie ćwiczeń -->
+    <div *ngIf="currentExercises?.length; else noData">
+     <div *ngFor="let ex of currentExercises; trackBy: trackByExercise" class="exercise-card">
+  <h2>{{ ex.name }}</h2>
+  <table>
+    <thead>
+      <tr><th>Seria</th><th>Powtórzenia</th><th>Kg</th></tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let s of ex.sets">
+        <td><h3>{{s.set}}</h3></td>
+        <td><h3>{{s.reps}}</h3></td>
+        <td><h3>{{s.weight}}</h3></td>
+      </tr>
+    </tbody>
+  </table>
+  <form (submit)="addSet($event, ex)" class="add-set-form">
+    <input type="number" name="reps" placeholder="Powtórzenia" required />
+    <input type="number" name="weight" placeholder="Kg" required />
+    <button type="submit">Dodaj serię</button>
+  </form>
+
+
+  <div class="chart-container">
+    <canvas id="chart-{{ex.name}}"></canvas>
+  </div>
+</div>
+
+    </div>
+    <ng-template #noData>
+      <p>Brak danych na ten dzień.</p>
+    </ng-template>
+  </div>
+</div>

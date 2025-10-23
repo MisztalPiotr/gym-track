@@ -1,0 +1,51 @@
+
+  
+  .custom-navbar.navbar a {
+    color: white; /* Set your desired text color */
+  }
+
+  .custom-logo {
+    font-family: 'Your Custom Font', cursive; /* Use a custom font if desired */
+    font-size: 24px; /* Adjust the font size as needed */
+    font-weight: bold; /* Adjust the font weight as needed */
+    letter-spacing: 2px; /* Adjust the letter spacing as needed */
+    color: #ffffff; /* Set your desired text color */
+    text-decoration: none; /* Remove underline, if any */
+    background-color: #7a5207; /* Set your desired background color */
+    padding: 16px 16px; /* Adjust the padding as needed */
+    border-radius: 5px; /* Add border-radius for rounded corners if desired */
+  }
+  
+  /* Additional styles for hover or other states if needed */
+  .custom-logo:hover {
+    text-decoration: underline; /* Add underline on hover if desired */
+    color: #ffcc00; /* Change color on hover if desired */
+  }
+
+  .custom-link {
+    font-family: 'Your Custom Font', cursive; /* Use a custom font if desired */
+    font-size: 16px; /* Adjust the font size as needed */
+     /* Adjust the font weight as needed */
+    letter-spacing: 2px; /* Adjust the letter spacing as needed */
+    color: #ffffff; /* Set your desired text color */
+    text-decoration: none; /* Remove underline, if any */
+
+  }
+  
+  /* Additional styles for hover or other states if needed */
+  .nav-link.custom-link:hover {
+    color: #ffcc00; /* Change color on hover if desired */
+  }
+  
+  .nav-link.custom-link.active {
+    background-color:  #ffcc00; /* Set your desired background color for the active link */
+    /* Add any other styles for the active link */
+  }
+  
+  .custom-navbar .navbar-toggler {
+  background-color: rgba(0,0,0,0.3);
+}
+/* Biała ikona hamburgera */
+.custom-navbar .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255,0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}

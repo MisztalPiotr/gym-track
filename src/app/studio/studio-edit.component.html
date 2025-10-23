@@ -1,0 +1,24 @@
+<div class="main-content">
+    <div class="blurred-background"></div>
+    <div class="studio-card" *ngFor="let studio of allStudios">
+      <h3>{{ studio.studioName}}</h3>
+      <div *ngIf="studio.imageUrl" class="upload-preview-container">
+        <img [src]="studio.imageUrl" alt="Uploaded Image">
+      </div>
+      <p><strong>Lokalizacja:</strong> {{ studio.location }}</p>
+      <p><strong>Właściciel:</strong> {{ studio.ownerUsername }}</p>
+      <div class="button-container">
+        <div class="edit-button-container">
+          <button class="btn btn-warning" (click)="showDetails(studio)" >Edytuj</button>
+        </div>
+        <div class="edit-button-container" (click)="showReservations(studio)">
+          <button class="btn btn-primary">Rezerwacje</button>
+        </div>
+        <div class="delete-button-container">
+          <button mat-raised-button color="warn" (click)="deleteStudio($event, studio)">Usuń</button>
+        </div>
+      </div>
+      
+     
+    </div>
+  </div>

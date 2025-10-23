@@ -1,0 +1,11 @@
+
+<div *ngIf="(afAuth.user | async)">
+    User is logged in
+
+    <br>
+    
+</div>
+<div *ngIf="!(afAuth.user | async)">
+    User is not logged in
+</div>
+

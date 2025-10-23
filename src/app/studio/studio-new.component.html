@@ -1,0 +1,104 @@
+
+<div class="main-content">
+<div class="blurred-background"></div>
+    <mat-card>
+        <H2>Swórz swój biznes</H2>
+        
+        <form [formGroup]="studioForm" (ngSubmit)="addStudio()" >
+            <form [formGroup]="imageForm" (ngSubmit)="uploadImage()" class="upload-form">
+                <h2>Dodaj zdjęcie zakładu</h2>
+                <input type="file"  id="file" (change)="handleFileInput($event)" class="upload-input">
+                <label for="file" class="upload-label">
+                    <span *ngIf="!selectedFileName">Wybierz zdjęcie</span>
+                    <span *ngIf="selectedFileName">{{ selectedFileName }}</span>
+                  </label>
+                <button class="uploadImageButton" (click)="uploadImage()">Dodaj</button>
+                <div *ngIf="imageUrl" class="upload-preview-container">
+                  <img [src]="imageUrl" alt="Uploaded Image">
+                </div>
+            </form>
+
+            <p>
+                <mat-form-field appearance="outline">
+                  <mat-label>Nazwa zakaładu</mat-label>
+                  <input autocomplete="off" formControlName="studioName" type="text" matInput placeholder="Nazwa zakładu">
+                </mat-form-field>
+            </p>
+
+            <p>
+                <mat-form-field appearance="outline">
+                  <mat-label>Typ zakładu</mat-label>
+                  
+                  <mat-select formControlName="type">
+                    <mat-option *ngFor="let type of businessTypes" [value]="type">{{ type }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+            </p>
+            
+            <p>
+                <mat-form-field appearance="outline">
+                    <mat-label>Lokalizacja</mat-label>
+                    <input autocomplete="off" formControlName="location" type="text" matInput placeholder="Lokalizacja">
+                </mat-form-field>
+            </p>
+
+            <p>
+                <mat-form-field appearance="outline">
+                    <mat-label>Właściciel</mat-label>
+                    <input autocomplete="off" formControlName="ownerUsername" type="text" matInput placeholder="Właściciel">
+                </mat-form-field>
+            </p>
+           
+              
+             <div class="studio-card" *ngFor="let service of newStudio.service">
+                 <mat-card class="services-card">
+                    <div *ngIf="service.imageUrl" class="upload-preview-container">
+                        <img [src]="service.imageUrl" alt="Uploaded Image">
+                      </div>
+                     <h5>{{ service.title }}</h5>
+                    <p>{{ service.description }}</p>
+                    <button mat-raised-button color="warn" (click)="deleteService(service.title, service.description)">Usuń</button>
+             </mat-card>
+                 <br>
+             </div>
+              
+               
+            <mat-card class="services-card">
+                <form [formGroup]="serviceForm" (ngSubmit)="addService()" type="">
+                    <h2>Tworzenie usługi</h2>
+                    <form [formGroup]="imageServiceForm" (ngSubmit)="uploadServiceImage()" class="upload-form">
+                        <h2>Dodaj zdjęcie usługi</h2>
+                        <input type="file"  id="serviceFile" (change)="handleFileServiceInput($event)" class="upload-input">
+                        <label for="serviceFile" class="upload-label">
+                            <span *ngIf="!selectedServiceFileName">Wybierz zdjęcie</span>
+                            <span *ngIf="selectedServiceFileName">{{ selectedServiceFileName }}</span>
+                          </label>
+                        <button class="uploadImageButton" (click)="uploadServiceImage()">Dodaj</button>
+                        <div *ngIf="imageServiceUrl" class="upload-preview-container">
+                          <img [src]="imageServiceUrl" alt="Uploaded Image">
+                        </div>
+                    </form>
+                    <p>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Tytuł</mat-label>
+                            <input autocomplete="off" formControlName="title" type="text" matInput placeholder="Tytuł">
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Opis</mat-label>
+                            <input autocomplete="off" formControlName="description" type="text" matInput placeholder="Opis">
+                        </mat-form-field>
+                    </p>
+                
+                    <button mat-raised-button color="primary">Dodaj usługę</button>
+            </form>
+    
+        </mat-card>
+        <br>
+        <br>
+        <br>
+        <button mat-raised-button color="primary">Dodaj biznes</button>
+        </form>
+        
+</mat-card>

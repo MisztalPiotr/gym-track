@@ -1,0 +1,33 @@
+
+<div class="filter-container">
+    <select id="filterSelect" [(ngModel)]="filterState" class="form-select">
+      <option value="all">Wszystkie</option>
+      <option value="waiting">Oczekujące</option>
+      <option value="true">Potwierdzone</option>
+      <option value="false">Odrzucone</option>
+    </select>
+  </div>
+  <div style="margin-bottom: 70px;">
+    <!-- Content below .main-content -->
+  </div>
+<div class="main-content">
+
+<div class="blurred-background"></div>
+    
+<div *ngFor="let service of studio.service">
+    <div *ngFor="let reservation of service.reservations">
+      <div class="studio-card-reservation" *ngIf="reservation && filterReservation(reservation)"  [ngStyle]="{'background-color': reservation.confirmed === 'false' ? '#FF6F61' : (reservation.confirmed === 'true' ? '#88B04B' : '#EFC050')}">
+        <h2>{{service.title}} Data: {{reservation.startDate}} </h2>
+        <h2>Status: {{mapConfirmationStatus(reservation.confirmed)}}</h2>
+        <div *ngIf="reservation.confirmed == 'waiting'" class="button-container">
+          <div class="confirm-button-container">
+            <button class="confirm" mat-raised-button (click)="confirmReservation(service,reservation)">Potwierdź</button>
+          </div>
+          <div class="reject-button-container">
+            <button mat-raised-button color="warn" (click)="rejectReservation(service,reservation)">Odrzuć</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

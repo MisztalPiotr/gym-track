@@ -1,0 +1,34 @@
+<div class="main-content">
+    <div class="blurred-background"></div>
+    <div class="studio-card">
+      <h3>{{ studio.studioName}}</h3>
+      <p><strong>Lokalizacja:</strong> {{ studio.location }}</p>
+      <div *ngIf="studio.imageUrl" class="upload-preview-container">
+        <img [src]="studio.imageUrl" alt="Uploaded Image">
+      </div>
+     
+      <!-- <p><strong>Właściciel:</strong> {{ studio.ownerUsername }}</p> -->
+      <br>
+    </div> 
+      <!-- <h4>Usługi:</h4> -->
+      <ul class="service-ul">
+        <li *ngFor="let service of studio.service">
+          <mat-card class="service-card">
+            <div class="serviceImgContainerParent">
+              <div class="serviceImgContainer">
+                <div *ngIf="service.imageUrl" class="upload-preview-container">
+                  <img [src]="service.imageUrl" alt="Uploaded Image">
+                </div>
+              </div>
+            </div>
+            <h5>{{ service.title }}</h5>
+            <p>{{ service.description }}</p>
+          
+            <button type="button" class="btn btn-primary" (click)="openSweetAlert(service)">
+              Umów
+            </button>
+          </mat-card>
+        </li>
+      </ul>
+    
+  </div>
