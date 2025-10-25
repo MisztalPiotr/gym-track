@@ -27,6 +27,7 @@ import { StudioEditDetailsComponent } from './studio/studio-edit-details.compone
 import { ReservationConfirmComponent } from './reservations/reservation-confirm.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TrainingDiaryComponent } from './training-diary/training-diary.component';
+import { ExerciseComponent } from './exercise/exercise.component';
 
 @NgModule({
     declarations: [
@@ -43,7 +44,8 @@ import { TrainingDiaryComponent } from './training-diary/training-diary.componen
         StudioEditComponent,
         StudioEditDetailsComponent,
         ReservationConfirmComponent,
-        TrainingDiaryComponent
+        TrainingDiaryComponent,
+        ExerciseComponent
     ],
     imports: [
         NgbModule,

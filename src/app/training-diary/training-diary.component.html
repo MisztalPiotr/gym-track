@@ -39,34 +39,13 @@
 <div class="blurred-background"></div>
   <div id="currentDayContainer">
     <!-- renderowanie ćwiczeń -->
-    <div *ngIf="currentExercises?.length; else noData">
-     <div *ngFor="let ex of currentExercises; trackBy: trackByExercise" class="exercise-card">
-  <h2>{{ ex.name }}</h2>
-  <table>
-    <thead>
-      <tr><th>Seria</th><th>Powtórzenia</th><th>Kg</th></tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let s of ex.sets">
-       <td><h3>{{s.set}}</h3></td>
-        <td><h3>{{s.reps}}</h3></td>
-        <td><h3>{{s.weight}}</h3></td>
-        
-      </tr>
-    </tbody>
-  </table>
-  <form (submit)="addSet($event, ex)" class="add-set-form">
-    <input type="number" inputmode="numeric" pattern="[0-9]*" name="reps" placeholder="Powtórzenia" required />
-    <input type="number" inputmode="numeric"  name="weight"  pattern="[0-9]*" placeholder="Kg" required />
-    <button type="submit">Dodaj</button>
-  </form>
-
-
-  <div class="chart-container">
-    <canvas id="chart-{{ex.name}}"></canvas>
-  </div>
-</div>
-
+  <div *ngIf="currentExercises?.length; else noData">
+<app-exercise
+  *ngFor="let ex of currentExercises; trackBy: trackByExercise"
+  [exercise]="ex"
+  [userKey]="userKey"
+  [currentDay]="currentDay">
+</app-exercise>
     </div>
     <ng-template #noData>
       <p>Brak danych na ten dzień.</p>

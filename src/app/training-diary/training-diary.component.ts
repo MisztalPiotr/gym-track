@@ -193,51 +193,5 @@ onDayChange(event: any): void {
     })
     .catch(err => console.error('Błąd dodawania ćwiczenia:', err));
 }
-
-
-addSet(event: Event, exercise: Exercise): void {
-  event.preventDefault();
-  if (!this.currentDay || !exercise) return;
-
-  const form = event.target as HTMLFormElement;
-  const repsInput = form.querySelector<HTMLInputElement>('input[name="reps"]');
-  const weightInput = form.querySelector<HTMLInputElement>('input[name="weight"]');
-  if (!repsInput || !weightInput) return;
-
-  const reps = parseInt(repsInput.value);
-  const weight = parseFloat(weightInput.value);
-  if (isNaN(reps) || isNaN(weight)) return;
-
-  const setNumber = exercise.sets.length + 1;
-  const set: Set = { set: setNumber, reps, weight };
-
-  // Dodajemy serię do odpowiedniego ćwiczenia
-  this.diaryService.addSet(this.userKey, this.currentDay.date, exercise.name, set)
-    .then(() => {
-      // // Aktualizujemy ćwiczenie w currentDay
-      const dayExercise = this.currentDay!.exercises.find(ex => ex.name === exercise.name);
-      // if (dayExercise) {
-      //   dayExercise.sets = Array.isArray(dayExercise.sets)
-      //     ? [...dayExercise.sets, set] // Dodajemy serię do ćwiczenia
-      //     : [set];
-      // }
-
-      // //Aktualizujemy currentExercises
-      // this.currentExercises = this.currentExercises.map(ex => {
-      //   if (ex.name === exercise.name) {
-      //     return { ...ex, sets: [...ex.sets || [], set] }; // Dodajemy serię do ćwiczenia
-      //   }
-      //   return ex;
-      // });
-
-      // Czyszczenie pól input
-      repsInput.value = '';
-      weightInput.value = '';
-    })
-    .catch(err => console.error('Błąd dodawania serii:', err));
-}
-
-
-
 }
 // ...existing code...

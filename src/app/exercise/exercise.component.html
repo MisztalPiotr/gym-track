@@ -1,0 +1,27 @@
+<div class="exercise-card">
+  <h2>{{ exercise.name }}</h2>
+  <table>
+    <thead>
+      <tr><th>Seria</th><th>Powtórzenia</th><th>Kg</th></tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let s of exercise.sets">
+       <td><h3>{{s.set}}</h3></td>
+        <td><h3>{{s.reps}}</h3></td>
+        <td><h3>{{s.weight}}</h3></td>
+        
+      </tr>
+    </tbody>
+  </table>
+  <form (submit)="addSet($event)" class="add-set-form">
+  <div class="input-row">
+    <input type="text" inputmode="numeric" pattern="[0-9]*" [(ngModel)]="newReps" name="reps" placeholder="Powtórzenia" required />
+    <input type="text" inputmode="numeric" pattern="[0-9]*" [(ngModel)]="newWeight" name="weight" placeholder="Kg" required />
+    <button type="submit">Dodaj</button>
+  </div>
+</form>
+
+  <div class="chart-container">
+    <canvas id="chart-{{exercise.name}}"></canvas>
+  </div>
+</div>
