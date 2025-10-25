@@ -172,7 +172,7 @@ updateCurrentExercises(): void {
 
 onDayChange(event: any): void {
   const selectedDate = event.target.value;
-  const day = this.days.find(d => d.date === this.newDayDate);
+  const day = this.days.find(d => d.date === selectedDate);
   if (!day) return;
 
   this.currentDay = day;  // <-- currentDay musi być obiektem Day
