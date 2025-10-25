@@ -1,3 +1,7 @@
+.custom-navbar {
+  background-color: #1e1e1e; /* kolor carne / ciemna czerwień */
+}
+
 /* Hamburger */
 .custom-navbar .navbar-toggler {
   border: none;
@@ -65,4 +69,106 @@
   box-shadow: none;
   border: none;
   background: none;
+}
+
+/* Logo */
+.custom-logo {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  color: #95e654; /* stały kolor logo */
+  text-decoration: none; /* brak podkreślenia */
+  display: flex;
+  margin-right: 20px;
+  align-items: center;
+  cursor: pointer; /* wskazuje, że logo jest klikane */
+}
+
+.custom-logo:hover {
+  text-decoration: none; /* brak podkreślenia przy hover */
+  color: #95e654; /* kolor pozostaje stały */
+}
+
+.custom-logo span.fas {
+  margin-right: 8px; /* odstęp między ikoną a tekstem */
+  font-size: 24px;
+  color: #ffffff; /* ikona pozostaje biała */
+}
+
+
+
+.navbar-nav .nav-link {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  padding: 12px 20px; /* przestrzeń do kliknięcia */
+}
+.navbar-nav .nav-link {
+  color: #ffffff; /* standardowy tekst */
+  transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  color: #ffcc00; /* akcentowy, widoczny */
+}
+.navbar-nav .nav-link {
+  position: relative;
+}
+
+.navbar-nav .nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: #ffcc00; /* kolor akcentu */
+  bottom: 0;
+  left: 0;
+  transition: width 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover::after {
+  width: 100%;
+}
+
+
+
+
+/* Powitanie + logout */
+.navbar-user {
+  display: flex;
+  align-items: center;
+}
+
+.welcome-text {
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  margin-right: 10px; /* odstęp między tekstem a wyloguj */
+}
+
+.logout-link {
+  color: #ffffff;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.logout-link span {
+  margin-right: 5px;
+}
+
+.logout-link:hover {
+  color: #ffcc00;
+}
+
+/* Małe ekrany – linki menu będą pod hamburgerem, powitanie + wyloguj zawsze widoczne */
+@media (max-width: 767px) {
+  .navbar-user {
+    order: 1; /* pokazywane po prawej, niezależnie od collapse */
+  }
 }
