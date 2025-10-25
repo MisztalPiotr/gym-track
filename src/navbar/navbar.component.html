@@ -4,50 +4,46 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
-<nav class="navbar navbar-expand-md  custom-navbar sticky-top">
+<nav class="navbar navbar-expand-md custom-navbar sticky-top bg-dark">
   <a class="navbar-brand custom-logo" [routerLink]="['/training-diary']">Booker</a>
-  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navb">
-  <span class="navbar-toggler-icon"></span>
-</button>
-    <div class="collapse navbar-collapse" id="navb">
+
+  <!-- Hamburger -->
+  <button class="navbar-toggler" type="button" (click)="menuOpen = !menuOpen">
+    <span class="navbar-toggler-icon" [class.open]="menuOpen"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" [class.show]="menuOpen" id="navb">
     <ul class="navbar-nav">
-    
       <li class="nav-item">
         <a class="nav-link custom-link" [routerLink]="['/training-diary']">Fryzjer</a>
       </li>
       <li class="nav-item">
         <a class="nav-link custom-link" [routerLink]="['/training-diary']">Salon Kosmetyczny</a>
       </li>
-
-      <li *ngIf="(afAuth.user | async)" class="nav-item" routerLinkActive="active">
-        <a class="nav-link custom-link" href="#" routerLink="/studio-new"><span class="fas fa-briefcase"></span> Dodaj Biznes</a>
+      <li *ngIf="(afAuth.user | async)" class="nav-item">
+        <a class="nav-link custom-link" routerLink="/studio-new"><span class="fas fa-briefcase"></span> Dodaj Biznes</a>
       </li>
-
-      
     </ul>
 
-    <ul class="nav navbar-nav ml-auto">
-      
-      <li *ngIf="(user)" class="nav-item">
-        <a class="nav-link custom-link" href="#" routerLink="/studio-edit"><span class="fas fa-user"></span> Moje biznesy</a>
-      </li>
-
-      <li *ngIf="(user)" class="nav-item">
-        <a class="nav-link custom-link" href="#" routerLink="/reservations"><span class="fas fa-user"></span> Rezerwacje</a>
-      </li>
-      <li *ngIf="!(afAuth.user | async)" class="nav-item">
-        <a class="nav-link custom-link" href="#" routerLink="/signup"><span class="fas fa-user"></span> Załóż konto</a>
-      </li>
-      <li *ngIf="!(afAuth.user | async)" class="nav-item">
-        <a class="nav-link custom-link" href="#" routerLink="/login"><span class="fas fa-sign-in-alt"></span> Zaloguj się</a>
+    <ul class="navbar-nav ml-auto">
+      <li *ngIf="user" class="nav-item">
+        <a class="nav-link custom-link" routerLink="/studio-edit"><span class="fas fa-user"></span> Moje biznesy</a>
       </li>
       <li *ngIf="user" class="nav-item">
-        <p class="nav-link custom-link" >Witaj {{user.email}}! </p>
+        <a class="nav-link custom-link" routerLink="/reservations"><span class="fas fa-user"></span> Rezerwacje</a>
+      </li>
+      <li *ngIf="!(afAuth.user | async)" class="nav-item">
+        <a class="nav-link custom-link" routerLink="/signup"><span class="fas fa-user"></span> Załóż konto</a>
+      </li>
+      <li *ngIf="!(afAuth.user | async)" class="nav-item">
+        <a class="nav-link custom-link" routerLink="/login"><span class="fas fa-sign-in-alt"></span> Zaloguj się</a>
+      </li>
+      <li *ngIf="user" class="nav-item">
+        <p class="nav-link custom-link">Witaj {{user.email}}!</p>
       </li>
       <li *ngIf="(afAuth.user | async)" class="nav-item" (click)="logout()">
-        <a class="nav-link custom-link" href="#" routerLink="/login" ><span class="fas fa-sign-in-alt" ></span> Wyloguj</a>
+        <a class="nav-link custom-link" routerLink="/login"><span class="fas fa-sign-in-alt"></span> Wyloguj</a>
       </li>
-    
     </ul>
   </div>
 </nav>

@@ -1,51 +1,68 @@
-
-  
-  .custom-navbar.navbar a {
-    color: white; /* Set your desired text color */
-  }
-
-  .custom-logo {
-    font-family: 'Your Custom Font', cursive; /* Use a custom font if desired */
-    font-size: 24px; /* Adjust the font size as needed */
-    font-weight: bold; /* Adjust the font weight as needed */
-    letter-spacing: 2px; /* Adjust the letter spacing as needed */
-    color: #ffffff; /* Set your desired text color */
-    text-decoration: none; /* Remove underline, if any */
-    background-color: #7a5207; /* Set your desired background color */
-    padding: 16px 16px; /* Adjust the padding as needed */
-    border-radius: 5px; /* Add border-radius for rounded corners if desired */
-  }
-  
-  /* Additional styles for hover or other states if needed */
-  .custom-logo:hover {
-    text-decoration: underline; /* Add underline on hover if desired */
-    color: #ffcc00; /* Change color on hover if desired */
-  }
-
-  .custom-link {
-    font-family: 'Your Custom Font', cursive; /* Use a custom font if desired */
-    font-size: 16px; /* Adjust the font size as needed */
-     /* Adjust the font weight as needed */
-    letter-spacing: 2px; /* Adjust the letter spacing as needed */
-    color: #ffffff; /* Set your desired text color */
-    text-decoration: none; /* Remove underline, if any */
-
-  }
-  
-  /* Additional styles for hover or other states if needed */
-  .nav-link.custom-link:hover {
-    color: #ffcc00; /* Change color on hover if desired */
-  }
-  
-  .nav-link.custom-link.active {
-    background-color:  #ffcc00; /* Set your desired background color for the active link */
-    /* Add any other styles for the active link */
-  }
-  
-  .custom-navbar .navbar-toggler {
-  background-color: rgba(0,0,0,0.3);
+/* Hamburger */
+.custom-navbar .navbar-toggler {
+  border: none;
+  background: none;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+  margin-right: 10px;
+  padding: 0;
+  outline: none;
+  box-shadow: none;
 }
-/* Biała ikona hamburgera */
+
+/* Linie hamburgera – wszystkie pseudo-elementami */
 .custom-navbar .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255,0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+  position: relative;
+  width: 24px;
+  height: 2px;
+  background-color: white; /* środkowa linia */
+  transition: all 0.3s ease-in-out;
+}
+
+.custom-navbar .navbar-toggler-icon::before,
+.custom-navbar .navbar-toggler-icon::after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background-color: white;
+  left: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.custom-navbar .navbar-toggler-icon::before {
+  top: -8px; /* górna linia */
+}
+
+.custom-navbar .navbar-toggler-icon::after {
+  top: 8px;  /* dolna linia */
+}
+
+/* Animacja w X */
+.custom-navbar .navbar-toggler-icon.open {
+  background-color: transparent; /* środkowa linia znika */
+}
+
+.custom-navbar .navbar-toggler-icon.open::before {
+  transform: rotate(45deg);
+  top: 0;
+}
+
+.custom-navbar .navbar-toggler-icon.open::after {
+  transform: rotate(-45deg);
+  top: 0;
+}
+
+/* Usuń outline/focus/box-shadow */
+.custom-navbar .navbar-toggler:focus,
+.custom-navbar .navbar-toggler:active,
+.custom-navbar .navbar-toggler:focus-visible {
+  outline: none;
+  box-shadow: none;
+  border: none;
+  background: none;
 }

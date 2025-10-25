@@ -20,9 +20,9 @@ body {
   max-width: 900px;
   margin: 0 auto;
   background-color: #1e1e1e;
-  border-radius: 10px;
+  
   padding: 10px;
-  box-shadow: 0 0 20px rgba(0, 255, 179, 0.2);
+ 
 }
 
 /* ================== */
@@ -183,10 +183,47 @@ h3 {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('/assets/images/hairdresser_background.jpg'); /* Replace with your background image */
+  background-color: #1e1e1e;
+  
+  padding: 10px;
+ 
   background-size: cover;
-  filter: blur(2px);
+  
   z-index: -1;
   opacity: 1;
 }
 
+
+input[type="text"],
+input[type="date"],
+select {
+   width: 90%;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  margin-bottom: 12px;
+}
+
+
+.accordion-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s;
+}
+
+.icon.rotated {
+  transform: rotate(180deg);
+}
+
+.accordion-content {
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}

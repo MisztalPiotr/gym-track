@@ -1,9 +1,19 @@
 <div class="container">
   <header>
-    <h1>Dziennik Treningowy</h1>
-    <div class="hamburger" (click)="toggleMenu()" [class.rotated]="menuOpen">
+    <div class="accordion">
+
+
+  <!-- Treść zakładki -->
+  <div class="accordion-content">
+    <p>To jest zawartość archiwalnego treningu.</p>
+  </div>
+   </div>
+   <div class="accordion-btn">
+    <img src="/assets/images/archive.png" (click)="toggleMenu()" [class.rotated]="menuOpen" alt="Archiwalny trening" class="icon">
+   </div>
+    <!-- <div class="hamburger" (click)="toggleMenu()" [class.rotated]="menuOpen">
       ☰
-    </div>
+    </div> -->
   </header>
 
   <nav id="menu" class="menu" [class.hidden]="!menuOpen">
@@ -15,8 +25,8 @@
     
   </nav>
 
- <div >
-  <h2>➕ Dodaj nowy dzień:</h2>
+ <div  class="current-day-panel">
+  <h2>Dodaj nowy dzień:</h2>
   <form (ngSubmit)="addNewDay()" #newDayForm="ngForm" class="add-day-form">
     <input type="date" [(ngModel)]="newDayDate" name="dayDate" required />
     <button type="submit" [disabled]="newDayForm.invalid">Dodaj</button>
@@ -24,7 +34,7 @@
 
   <!-- Wyświetl aktualny dzień -->
   <div *ngIf="currentDay" class="current-day-panel">
-   <h1>{{ currentDay?.date }}</h1>
+   <h2>{{ currentDay?.date }}</h2>
     <!-- Input na nazwę ćwiczenia -->
     <input type="text" [(ngModel)]="newExerciseName" placeholder="Nazwa ćwiczenia" name="exerciseName" />
 

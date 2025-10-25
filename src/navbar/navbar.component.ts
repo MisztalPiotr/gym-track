@@ -12,7 +12,7 @@ export class NavbarComponent implements OnInit {
 
     isCollapsed = true;
     user: firebase.default.User | null;
-
+    menuOpen = false;
     constructor(public afAuth: AngularFireAuth) {
         
       afAuth.authState.subscribe(user => {
