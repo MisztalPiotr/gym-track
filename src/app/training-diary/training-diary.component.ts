@@ -179,6 +179,14 @@ onDayChange(event: any): void {
   this.updateCurrentExercises();
 }
 
+getExistingExerciseNames(): string[] {
+  const namesSet = new Set<string>();
+  this.days.forEach(day => {
+    day.exercises.forEach(ex => namesSet.add(ex.name));
+  });
+  return Array.from(namesSet);
+}
+
   addExercise(): void {
   if (!this.newExerciseName.trim() || !this.currentDay) return;
 

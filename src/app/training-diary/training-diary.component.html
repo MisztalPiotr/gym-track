@@ -36,13 +36,20 @@
   <div *ngIf="currentDay" class="current-day-panel">
    <h2>{{ currentDay?.date }}</h2>
     <!-- Input na nazwę ćwiczenia -->
-    <input type="text" [(ngModel)]="newExerciseName" placeholder="Nazwa ćwiczenia" name="exerciseName" />
-
+    <input type="text" [(ngModel)]="newExerciseName" placeholder="Nazwa ćwiczenia" name="exerciseName" list="existingExercises" />
+<datalist id="existingExercises">
+  <option *ngFor="let name of getExistingExerciseNames()" [value]="name"></option>
+</datalist>
     <!-- Dodaj ćwiczenie -->
     <button style="margin-bottom: 20px;" (click)="addExercise()" [disabled]="!newExerciseName.trim()" class="add-set-btn">
       Dodaj ćwiczenie
     </button>
     
+
+
+
+
+
   </div>
 </div>
 
