@@ -15,8 +15,8 @@
   </table>
   <form (submit)="addSet($event)" class="add-set-form">
   <div class="input-row">
-    <input type="text" inputmode="numeric" pattern="[0-9]*" [(ngModel)]="newReps" name="reps" placeholder="Powtórzenia" required />
-    <input type="text" inputmode="numeric" pattern="[0-9]*" [(ngModel)]="newWeight" name="weight" placeholder="Kg" required />
+    <input type="text" inputmode="numeric" pattern="[0-9]*" [(ngModel)]="newReps" name="reps" [placeholder]="autoReps || 'Powtórzenia'" required />
+    <input type="text" inputmode="numeric" pattern="[0-9]*" [(ngModel)]="newWeight" name="weight" [placeholder]="autoWeight || 'Kg'" required />
     <button type="submit">Dodaj</button>
   </div>
 </form>

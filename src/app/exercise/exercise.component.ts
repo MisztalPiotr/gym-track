@@ -19,7 +19,8 @@ export class ExerciseComponent implements AfterViewInit, OnChanges{
   newReps!: number;
   newWeight!: number;
   chart!: Chart;
-
+  autoReps!: number;
+  autoWeight!: number;
   constructor(private diaryService: TrainingDiaryService) { }
 
   ngAfterViewInit() {
@@ -31,6 +32,7 @@ export class ExerciseComponent implements AfterViewInit, OnChanges{
     if (changes.allDays || changes.exercise) {
       this.refreshChart();
     }
+     this.setDefaultValuesFromLastDay();
   }
 
   addSet(event: Event): void {
@@ -52,6 +54,7 @@ export class ExerciseComponent implements AfterViewInit, OnChanges{
         // Czyszczenie pól input
         this.newReps = 0;
         this.newWeight = 0;
+        this.setDefaultValuesFromLastDay();
       })
       .catch(err => console.error('Błąd dodawania serii:', err));
   }
@@ -112,4 +115,41 @@ export class ExerciseComponent implements AfterViewInit, OnChanges{
       this.createChart();
     }
   }
+
+
+  setDefaultValuesFromLastDay(): void {
+  if (!this.allDays || this.allDays.length === 0 || !this.exercise) return;
+
+  const sortedDays = [...this.allDays].sort((a, b) => a.date.localeCompare(b.date));
+  let lastDay = null;
+
+  for (let i = sortedDays.length - 1; i >= 0; i--) {
+    if (sortedDays[i].date < this.currentDay.date) {
+      lastDay = sortedDays[i];
+      break;
+    }
+  }
+
+  if (!lastDay) return;
+
+  const lastExercise = lastDay.exercises.find(ex => ex.name === this.exercise.name);
+  if (!lastExercise || !lastExercise.sets) return;
+
+  const nextSetIndex = this.exercise.sets.length; // indeks następnej serii
+
+  if (lastExercise.sets[nextSetIndex]) {
+    this.autoReps = lastExercise.sets[nextSetIndex].reps;
+    this.autoWeight = lastExercise.sets[nextSetIndex].weight;
+
+    // **ustawiamy inputy bezpośrednio**
+    this.newReps = this.autoReps;
+    this.newWeight = this.autoWeight;
+  } else {
+    this.autoReps = 0;
+    this.autoWeight = 0;
+    this.newReps = 0;
+    this.newWeight = 0;
+  }
 }
+}
+
