@@ -54,7 +54,8 @@
   *ngFor="let ex of currentExercises; trackBy: trackByExercise"
   [exercise]="ex"
   [userKey]="userKey"
-  [currentDay]="currentDay">
+  [currentDay]="currentDay"
+  [allDays]="days">
 </app-exercise>
     </div>
     <ng-template #noData>
